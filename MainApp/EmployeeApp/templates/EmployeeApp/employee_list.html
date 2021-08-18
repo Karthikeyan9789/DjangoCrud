@@ -1,0 +1,42 @@
+<html>
+<body>
+
+<h1>Employee List</h1>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<a href="{% url 'add_employee' %}">Add +</a>
+<table style="width:100%" border="0" cellpadding="0" cellspacing="">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Desc</th>
+        <th>Addrs</th>
+        <th>DOB</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody>
+    {% for obj in employees %}
+    <tr>
+        <th>{{obj.id}}</th>
+        <th>{{obj.name}}</th> 
+        <th>{{obj.designation}}</th>
+        <th>{{obj.address}}</th>
+        <th>{{obj.dob}}</th>
+        <th>
+            <a href="{% url 'update_employee' obj.id %}">Edit</a>
+            <a href="{% url 'delete_employee' obj.id %}">Delete</a>
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
